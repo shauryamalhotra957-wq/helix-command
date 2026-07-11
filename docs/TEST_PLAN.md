@@ -26,6 +26,7 @@ npm run audit
 ## Manual QA
 
 - Confirm all three scenarios can be selected.
+- Confirm the default Mumbai Monsoon Drill appears with real-place/simulated-telemetry labels.
 - Confirm policy sliders update metrics and dispatch cards.
 - Confirm pause, step, and reset controls update the mission clock.
 - Confirm the 3D canvas is nonblank at desktop and mobile widths.

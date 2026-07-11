@@ -8,7 +8,7 @@ The project is designed as a final-year showcase piece: it has a serious technic
 
 - 3D city digital twin rendered with Three.js, including sector towers, dependency lines, live incident pulses, and moving response resources.
 - Explainable planning engine that weighs capability match, ETA, sector criticality, population equity, resource reliability, cost, and policy settings.
-- Scenario theatre with three high-pressure crisis modes: Monsoon Surge, Cyber Blackout, and Heatfire Cascade.
+- Scenario theatre with a Mumbai real-place drill plus three high-pressure synthetic crisis modes: Monsoon Surge, Cyber Blackout, and Heatfire Cascade.
 - Forecast model projecting resilience, open demand, operating cost, and public trust across a 180-minute horizon.
 - Policy console that lets reviewers change the planner's priorities and immediately see a different dispatch plan.
 - Automated coverage for the planner and the top-level interface.
@@ -82,6 +82,8 @@ Use this three-part walkthrough:
 1. Pick a scenario and show the 3D twin reacting to active incidents.
 2. Change planner policy sliders and point out how assignments and forecasts update.
 3. Open the explainable plan and show that every action has ETA, capability match, risk reduction, and cost.
+
+The default scenario is **Mumbai Monsoon Drill**, a real-place simulated run using Mumbai district and infrastructure names with synthetic telemetry.
 
 ## Important Note
 

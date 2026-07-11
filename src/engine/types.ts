@@ -93,6 +93,8 @@ export interface Scenario {
   tagline: string
   briefing: string
   pressure: string
+  place?: string
+  dataMode?: string
   seed: number
   objectives: string[]
   sectors: Sector[]

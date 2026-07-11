@@ -201,6 +201,10 @@ function App() {
             <div>
               <p className="eyebrow">Current operation</p>
               <h2>{scenario.name}</h2>
+              <div className="mission-meta" aria-label="Scenario data mode">
+                {scenario.place && <span>{scenario.place}</span>}
+                {scenario.dataMode && <span>{scenario.dataMode}</span>}
+              </div>
               <p>{scenario.briefing}</p>
             </div>
             <ul className="objective-list">

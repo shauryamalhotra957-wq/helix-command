@@ -6,13 +6,14 @@ HELIX Command is an agentic digital twin for crisis response. It simulates a cit
 
 ## Three-Minute Walkthrough
 
-1. Start on Monsoon Surge.
+1. Start on Mumbai Monsoon Drill.
    - Point to the 3D towers and incident pulses.
+   - Show the labels: Mumbai, Maharashtra, India and simulated telemetry.
    - Explain that tower height and color encode sector risk.
-   - Show that resources are already moving toward assigned incidents.
+   - Show that BMC Pump Convoy and Rainhawk Drone Grid are already assigned to Mithi River surge near BKC.
 
 2. Open the incident queue.
-   - Select "Harbor flood gates at limit."
+   - Select "Mithi River surge near BKC."
    - Show the selected incident panel and the right-side dispatch logic.
    - Read one rationale: it includes capability coverage, reliability, and ETA.
 
@@ -39,6 +40,9 @@ A transparent heuristic planner. It scores every resource/incident pair using ca
 
 **Why a digital twin?**  
 Because it links physical sectors, dependencies, incidents, resources, and forecasts in one inspectable model.
+
+**Is Mumbai live data?**  
+No. It is a real-place drill using real location names and synthetic telemetry. The interface says this explicitly so it is impressive without being misleading.
 
 **What would make this production-grade?**  
 Real telemetry ingestion, live GIS data, operator auth, audit logs, model calibration, uncertainty intervals, and integration with incident-management systems.

@@ -226,7 +226,300 @@ const resources: Resource[] = [
   },
 ]
 
+const mumbaiSectors: Sector[] = [
+  {
+    id: 'mumbai-mithi-bkc',
+    name: 'Mithi River / BKC',
+    zone: 'Floodplain',
+    population: 320000,
+    criticality: 0.94,
+    position: { x: 50, y: 42 },
+    dependencies: ['mumbai-kurla-power', 'mumbai-airport'],
+    telemetry: { power: 69, medical: 75, mobility: 48, network: 78, water: 45, trust: 63 },
+  },
+  {
+    id: 'mumbai-dharavi-sion',
+    name: 'Dharavi-Sion Health Belt',
+    zone: 'Residential',
+    population: 740000,
+    criticality: 0.98,
+    position: { x: 42, y: 52 },
+    dependencies: ['mumbai-mithi-bkc', 'mumbai-jj-byculla'],
+    telemetry: { power: 71, medical: 58, mobility: 52, network: 74, water: 57, trust: 59 },
+  },
+  {
+    id: 'mumbai-airport',
+    name: 'CSMIA Airside Node',
+    zone: 'Airbridge',
+    population: 160000,
+    criticality: 0.93,
+    position: { x: 48, y: 28 },
+    dependencies: ['mumbai-weh-andheri', 'mumbai-powai-data'],
+    telemetry: { power: 84, medical: 83, mobility: 56, network: 82, water: 74, trust: 78 },
+  },
+  {
+    id: 'mumbai-weh-andheri',
+    name: 'Western Express / Andheri',
+    zone: 'Mobility',
+    population: 510000,
+    criticality: 0.9,
+    position: { x: 42, y: 20 },
+    dependencies: ['mumbai-airport', 'mumbai-powai-data'],
+    telemetry: { power: 80, medical: 79, mobility: 43, network: 76, water: 69, trust: 68 },
+  },
+  {
+    id: 'mumbai-kurla-power',
+    name: 'Kurla Power Feeders',
+    zone: 'Energy',
+    population: 280000,
+    criticality: 0.96,
+    position: { x: 58, y: 50 },
+    dependencies: ['mumbai-mithi-bkc', 'mumbai-harbor-port'],
+    telemetry: { power: 51, medical: 81, mobility: 64, network: 70, water: 66, trust: 62 },
+  },
+  {
+    id: 'mumbai-powai-data',
+    name: 'Powai-Vikhroli Data Spine',
+    zone: 'Network',
+    population: 220000,
+    criticality: 0.89,
+    position: { x: 66, y: 31 },
+    dependencies: ['mumbai-kurla-power'],
+    telemetry: { power: 78, medical: 82, mobility: 69, network: 61, water: 73, trust: 77 },
+  },
+  {
+    id: 'mumbai-harbor-port',
+    name: 'JNPT Harbor Link',
+    zone: 'Supply',
+    population: 180000,
+    criticality: 0.87,
+    position: { x: 78, y: 61 },
+    dependencies: ['mumbai-kurla-power', 'mumbai-colaba-command'],
+    telemetry: { power: 76, medical: 80, mobility: 57, network: 72, water: 60, trust: 70 },
+  },
+  {
+    id: 'mumbai-jj-byculla',
+    name: 'JJ / Byculla Hospital Arc',
+    zone: 'Health',
+    population: 390000,
+    criticality: 1,
+    position: { x: 35, y: 70 },
+    dependencies: ['mumbai-colaba-command', 'mumbai-dharavi-sion'],
+    telemetry: { power: 77, medical: 54, mobility: 60, network: 73, water: 68, trust: 76 },
+  },
+  {
+    id: 'mumbai-colaba-command',
+    name: 'Colaba Command Pier',
+    zone: 'Command',
+    population: 140000,
+    criticality: 0.86,
+    position: { x: 29, y: 86 },
+    dependencies: ['mumbai-harbor-port'],
+    telemetry: { power: 86, medical: 84, mobility: 72, network: 85, water: 78, trust: 82 },
+  },
+]
+
+const mumbaiResources: Resource[] = [
+  {
+    id: 'm-rainhawk-drone',
+    name: 'Rainhawk Drone Grid',
+    kind: 'drone',
+    homeSectorId: 'mumbai-airport',
+    position: { x: 48, y: 28 },
+    capabilities: ['survey', 'water-relief', 'reroute'],
+    capacity: 72,
+    speed: 3.35,
+    reliability: 0.91,
+    costPerMinute: 34,
+    status: 'ready',
+  },
+  {
+    id: 'm-bmc-pump',
+    name: 'BMC Pump Convoy',
+    kind: 'logistics',
+    homeSectorId: 'mumbai-mithi-bkc',
+    position: { x: 51, y: 41 },
+    capabilities: ['water-relief', 'supply', 'evacuate'],
+    capacity: 88,
+    speed: 1.38,
+    reliability: 0.87,
+    costPerMinute: 58,
+    status: 'ready',
+  },
+  {
+    id: 'm-grid-tata',
+    name: 'Tata Grid Blackstart',
+    kind: 'power',
+    homeSectorId: 'mumbai-kurla-power',
+    position: { x: 59, y: 50 },
+    capabilities: ['restore-power', 'survey'],
+    capacity: 92,
+    speed: 1.42,
+    reliability: 0.93,
+    costPerMinute: 66,
+    status: 'ready',
+  },
+  {
+    id: 'm-med-jj',
+    name: 'JJ Rapid Triage Cell',
+    kind: 'medical',
+    homeSectorId: 'mumbai-jj-byculla',
+    position: { x: 35, y: 70 },
+    capabilities: ['triage', 'evacuate', 'shelter'],
+    capacity: 82,
+    speed: 1.5,
+    reliability: 0.94,
+    costPerMinute: 53,
+    status: 'ready',
+  },
+  {
+    id: 'm-med-sion',
+    name: 'Sion Mobile Clinic',
+    kind: 'medical',
+    homeSectorId: 'mumbai-dharavi-sion',
+    position: { x: 43, y: 53 },
+    capabilities: ['triage', 'shelter'],
+    capacity: 65,
+    speed: 1.32,
+    reliability: 0.88,
+    costPerMinute: 44,
+    status: 'ready',
+  },
+  {
+    id: 'm-cyber-powai',
+    name: 'Powai Network Cell',
+    kind: 'cyber',
+    homeSectorId: 'mumbai-powai-data',
+    position: { x: 66, y: 31 },
+    capabilities: ['restore-network', 'reroute', 'survey'],
+    capacity: 73,
+    speed: 2.18,
+    reliability: 0.92,
+    costPerMinute: 61,
+    status: 'ready',
+  },
+  {
+    id: 'm-mmrda-reroute',
+    name: 'MMRDA Reroute Desk',
+    kind: 'logistics',
+    homeSectorId: 'mumbai-weh-andheri',
+    position: { x: 42, y: 20 },
+    capabilities: ['reroute', 'evacuate', 'supply'],
+    capacity: 84,
+    speed: 1.74,
+    reliability: 0.89,
+    costPerMinute: 49,
+    status: 'ready',
+  },
+  {
+    id: 'm-harbor-lifeline',
+    name: 'Harbor Lifeline Barges',
+    kind: 'shelter',
+    homeSectorId: 'mumbai-harbor-port',
+    position: { x: 78, y: 61 },
+    capabilities: ['shelter', 'supply', 'water-relief'],
+    capacity: 86,
+    speed: 1.18,
+    reliability: 0.86,
+    costPerMinute: 47,
+    status: 'ready',
+  },
+  {
+    id: 'm-fire-airport',
+    name: 'Airport Rescue Crew',
+    kind: 'field',
+    homeSectorId: 'mumbai-airport',
+    position: { x: 49, y: 29 },
+    capabilities: ['contain-fire', 'evacuate', 'survey'],
+    capacity: 76,
+    speed: 1.52,
+    reliability: 0.9,
+    costPerMinute: 68,
+    status: 'ready',
+  },
+  {
+    id: 'm-command-colaba',
+    name: 'Colaba Incident Cell',
+    kind: 'drone',
+    homeSectorId: 'mumbai-colaba-command',
+    position: { x: 29, y: 86 },
+    capabilities: ['survey', 'reroute', 'supply'],
+    capacity: 61,
+    speed: 2.6,
+    reliability: 0.9,
+    costPerMinute: 38,
+    status: 'ready',
+  },
+]
+
 const incidentSets: Record<string, Incident[]> = {
+  mumbai: [
+    {
+      id: 'i-mumbai-mithi-overtop',
+      title: 'Mithi River surge near BKC',
+      kind: 'flood',
+      sectorId: 'mumbai-mithi-bkc',
+      severity: 9.2,
+      urgency: 9.5,
+      stability: 0.27,
+      demand: 98,
+      startedMinutesAgo: 21,
+      requiredCapabilities: ['water-relief', 'evacuate', 'survey'],
+      description: 'A thunderstorm cell and high runoff are modeled as pushing Mithi River drainage beyond safe margin near BKC and Kurla approaches.',
+    },
+    {
+      id: 'i-mumbai-kurla-feed',
+      title: 'Kurla feeder brownout cascade',
+      kind: 'grid',
+      sectorId: 'mumbai-kurla-power',
+      severity: 8.4,
+      urgency: 8.7,
+      stability: 0.36,
+      demand: 89,
+      startedMinutesAgo: 18,
+      requiredCapabilities: ['restore-power', 'survey'],
+      description: 'Modeled substation protection trips are threatening power continuity for pump stations, hospitals, and traffic control.',
+    },
+    {
+      id: 'i-mumbai-sion-triage',
+      title: 'Dharavi-Sion triage overload',
+      kind: 'medical',
+      sectorId: 'mumbai-dharavi-sion',
+      severity: 8.1,
+      urgency: 8.9,
+      stability: 0.43,
+      demand: 86,
+      startedMinutesAgo: 36,
+      requiredCapabilities: ['triage', 'shelter', 'evacuate'],
+      description: 'Dense-neighborhood shelter intake and respiratory cases are modeled as exceeding local triage throughput.',
+    },
+    {
+      id: 'i-mumbai-weh-gridlock',
+      title: 'Western Express evacuation gridlock',
+      kind: 'logistics',
+      sectorId: 'mumbai-weh-andheri',
+      severity: 7.7,
+      urgency: 8.4,
+      stability: 0.4,
+      demand: 82,
+      startedMinutesAgo: 27,
+      requiredCapabilities: ['reroute', 'survey', 'supply'],
+      description: 'Standing water and signal delays are modeled as constricting airport, hospital, and relief convoy movement.',
+    },
+    {
+      id: 'i-mumbai-powai-network',
+      title: 'Powai telemetry degradation',
+      kind: 'cyber',
+      sectorId: 'mumbai-powai-data',
+      severity: 7.3,
+      urgency: 7.9,
+      stability: 0.49,
+      demand: 72,
+      startedMinutesAgo: 31,
+      requiredCapabilities: ['restore-network', 'reroute'],
+      description: 'Network jitter is modeled as degrading shared dashboards and control-room synchronization across agencies.',
+    },
+  ],
   monsoon: [
     {
       id: 'i-flood-harbor',
@@ -391,9 +684,9 @@ const incidentSets: Record<string, Incident[]> = {
   ],
 }
 
-function cloneSectors(incidentIds: string[]) {
+function cloneSectors(incidentIds: string[], sourceSectors = sectors) {
   const stressedSectors = new Set(incidentIds)
-  return sectors.map((sector) => {
+  return sourceSectors.map((sector) => {
     if (!stressedSectors.has(sector.id)) return { ...sector, telemetry: { ...sector.telemetry } }
     return {
       ...sector,
@@ -410,18 +703,26 @@ function cloneSectors(incidentIds: string[]) {
   })
 }
 
-function cloneResources() {
-  return resources.map((resource) => ({ ...resource, position: { ...resource.position } }))
+function cloneResources(sourceResources = resources) {
+  return sourceResources.map((resource) => ({ ...resource, position: { ...resource.position } }))
+}
+
+interface BuildScenarioOptions {
+  sectors?: Sector[]
+  resources?: Resource[]
+  place?: string
+  dataMode?: string
 }
 
 function buildScenario(
-  id: keyof typeof incidentSets,
+  id: string,
   name: string,
   tagline: string,
   pressure: string,
   briefing: string,
   objectives: string[],
   seed: number,
+  options: BuildScenarioOptions = {},
 ): Scenario {
   const incidentSet = incidentSets[id]
   if (!incidentSet) throw new Error(`Missing incident set ${id}.`)
@@ -432,15 +733,36 @@ function buildScenario(
     tagline,
     pressure,
     briefing,
+    place: options.place,
+    dataMode: options.dataMode,
     objectives,
     seed,
-    sectors: cloneSectors(incidents.map((incident) => incident.sectorId)),
-    resources: cloneResources(),
+    sectors: cloneSectors(incidents.map((incident) => incident.sectorId), options.sectors),
+    resources: cloneResources(options.resources),
     incidents,
   }
 }
 
 export const scenarios: Scenario[] = [
+  buildScenario(
+    'mumbai',
+    'Mumbai Monsoon Drill',
+    'A real-place simulated run for Mumbai: BKC flooding, Kurla power stress, Sion triage, and Western Express gridlock.',
+    'Mumbai · thunderstorm + flood response',
+    'A Mumbai real-place drill uses named districts, hospitals, airport links, and infrastructure nodes with simulated telemetry inspired by humid monsoon conditions.',
+    [
+      'Keep Mithi River response ahead of hospital overload',
+      'Stabilize Kurla power before pump capacity collapses',
+      'Clear Western Express routes for airside and medical movement',
+    ],
+    27012,
+    {
+      sectors: mumbaiSectors,
+      resources: mumbaiResources,
+      place: 'Mumbai, Maharashtra, India',
+      dataMode: 'Real-place drill · simulated telemetry · not live emergency data',
+    },
+  ),
   buildScenario(
     'monsoon',
     'Monsoon Surge',

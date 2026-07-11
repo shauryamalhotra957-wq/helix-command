@@ -18,7 +18,7 @@ Scenario data
 
 The engine lives in `src/engine`.
 
-- `scenarios.ts` defines sectors, incidents, resources, objectives, and default policy.
+- `scenarios.ts` defines sectors, incidents, resources, objectives, and default policy. It includes a Mumbai real-place drill with named city infrastructure and synthetic telemetry.
 - `planner.ts` computes sector risk, resource assignments, forecasts, scorecards, and insights.
 - `math.ts` contains deterministic helpers such as distance, median, seeded randomness, and clamping.
 - `types.ts` defines the domain model.
