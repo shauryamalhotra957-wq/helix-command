@@ -14,6 +14,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /Cyber Blackout/i })).toBeInTheDocument()
     expect(await screen.findByTestId('digital-twin-canvas')).toBeInTheDocument()
     expect(screen.getByText(/Dispatch plan/i)).toBeInTheDocument()
+    expect(screen.getByText(/Strategy compare/i)).toBeInTheDocument()
   })
 
   it('switches scenarios and keeps the interface populated', async () => {
@@ -34,5 +35,14 @@ describe('App', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Reset mission clock' }))
     expect(screen.getByLabelText('Mission clock')).toHaveTextContent('T+000m')
+  })
+
+  it('applies a strategy preset to the planner policy', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Apply Speed-first' }))
+
+    expect(screen.getByLabelText('Move faster')).toHaveValue('0.95')
+    expect(screen.getByLabelText('Control cost')).toHaveValue('0.22')
   })
 })

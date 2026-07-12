@@ -20,6 +20,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 import { ForecastChart } from './components/ForecastChart'
 import { IncidentQueue } from './components/IncidentQueue'
 import { MetricCard } from './components/MetricCard'
+import { PlanComparison } from './components/PlanComparison'
 import { PolicyPanel } from './components/PolicyPanel'
 import { analyzeMission, getIncident, getResource, getSector } from './engine/planner'
 import { defaultPolicy, scenarios } from './engine/scenarios'
@@ -256,6 +257,12 @@ function App() {
               onSelectIncident={setSelectedIncidentId}
             />
             <PolicyPanel policy={policy} onChange={setPolicy} />
+            <PlanComparison
+              scenario={scenario}
+              activePolicy={policy}
+              activeAnalysis={analysis}
+              onApply={setPolicy}
+            />
           </aside>
 
           <section className="mission-core">
