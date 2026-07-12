@@ -4,6 +4,15 @@ HELIX Command is a browser-based crisis response simulator for city-scale operat
 
 The project is designed as a final-year showcase piece: it has a serious technical thesis, a polished real-time interface, deterministic simulation logic, tests, and presentation-ready documentation.
 
+## Project Snapshot
+
+| Area | Detail |
+| --- | --- |
+| Experience | City-scale crisis response simulator with a 3D digital twin |
+| Core system | Scenario engine, dispatch planner, policy comparison, resilience forecast |
+| Design signal | Operator cockpit with incident context, strategy controls, and explanatory panels |
+| Quality signal | Vitest, Testing Library, oxlint, production build, npm audit |
+
 ## What Makes It Different
 
 - 3D city digital twin rendered with Three.js, including sector towers, dependency lines, live incident pulses, and moving response resources.
