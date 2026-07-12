@@ -283,7 +283,7 @@ export function DigitalTwin({
   return (
     <section className="twin-shell" aria-label="3D city digital twin">
       <div className="twin-toolbar">
-        <span>3D digital twin</span>
+        <span>City response map</span>
         <span>{scenario.pressure}</span>
       </div>
       <div className="twin-canvas" ref={hostRef} data-testid="digital-twin-canvas" />

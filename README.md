@@ -1,6 +1,6 @@
 # HELIX Command
 
-HELIX Command is an agentic digital-twin command center for city-scale crisis response. It simulates a living city, ranks sector risk, assigns response resources, forecasts resilience, and explains every dispatch decision without needing external APIs or keys.
+HELIX Command is a browser-based crisis response simulator for city-scale operations. It simulates a living city, ranks sector risk, assigns response resources, forecasts resilience, and explains every dispatch decision without needing external APIs or keys.
 
 The project is designed as a final-year showcase piece: it has a serious technical thesis, a polished real-time interface, deterministic simulation logic, tests, and presentation-ready documentation.
 
@@ -8,7 +8,8 @@ The project is designed as a final-year showcase piece: it has a serious technic
 
 - 3D city digital twin rendered with Three.js, including sector towers, dependency lines, live incident pulses, and moving response resources.
 - Explainable planning engine that weighs capability match, ETA, sector criticality, population equity, resource reliability, cost, and policy settings.
-- Scenario theatre with a Mumbai real-place drill plus three high-pressure synthetic crisis modes: Monsoon Surge, Cyber Blackout, and Heatfire Cascade.
+- Human-friendly operator cockpit with scenario cards, an incident queue, priority sliders, selected incident context, and dispatch reasoning in one screen.
+- Mumbai real-place drill plus three high-pressure synthetic crisis modes: Monsoon Surge, Cyber Blackout, and Heatfire Cascade.
 - Forecast model projecting resilience, open demand, operating cost, and public trust across a 180-minute horizon.
 - Policy console that lets reviewers change the planner's priorities and immediately see a different dispatch plan.
 - Automated coverage for the planner and the top-level interface.
@@ -21,6 +22,14 @@ npm run dev
 ```
 
 Then open the local URL printed by Vite.
+
+## Operating The App
+
+1. Choose a drill from the scenario cards at the top.
+2. Select an incident from **What needs attention**.
+3. Adjust **Decision weights** to change what the planner values.
+4. Read **Why these teams** to explain the dispatch, ETA, risk reduction, and cost.
+5. Use the city map and recovery forecast to show how the response changes over time.
 
 ## Verification
 
@@ -75,13 +84,13 @@ See [docs/SECURITY.md](docs/SECURITY.md) and [docs/SHIP_CHECKLIST.md](docs/SHIP_
 
 Use this one-liner:
 
-> "HELIX Command is a browser-based agentic digital twin that plans, explains, and visualizes crisis response across a simulated city."
+> "HELIX Command is a browser-based crisis response simulator that plans, explains, and visualizes recovery across a simulated city."
 
 Use this three-part walkthrough:
 
-1. Pick a scenario and show the 3D twin reacting to active incidents.
-2. Change planner policy sliders and point out how assignments and forecasts update.
-3. Open the explainable plan and show that every action has ETA, capability match, risk reduction, and cost.
+1. Pick a scenario from the top cards and show the selected priority.
+2. Change the decision sliders and point out how assignments and forecasts update.
+3. Show that every dispatch has ETA, risk reduction, cost, and rationale.
 
 The default scenario is **Mumbai Monsoon Drill**, a real-place simulated run using Mumbai district and infrastructure names with synthetic telemetry.
 

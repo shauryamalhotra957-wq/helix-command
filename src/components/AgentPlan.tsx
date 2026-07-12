@@ -33,8 +33,8 @@ export function AgentPlan({ scenario, assignments, insights, selectedIncidentId 
       <section className="panel plan-panel" aria-label="Agent plan">
         <div className="panel__heading">
           <div>
-            <p className="eyebrow">Explainable agent plan</p>
-            <h2>Dispatch logic</h2>
+            <p className="eyebrow">Dispatch plan</p>
+            <h2>Why these teams</h2>
           </div>
           <BrainCircuit size={19} aria-hidden="true" />
         </div>
@@ -46,7 +46,7 @@ export function AgentPlan({ scenario, assignments, insights, selectedIncidentId 
               <article className="assignment-item" key={`${assignment.incidentId}-${assignment.resourceId}`}>
                 <div className="assignment-item__top">
                   <strong>{resource.name}</strong>
-                  <span>score {assignment.score}</span>
+                  <span>fit {assignment.score}</span>
                 </div>
                 <p>{incident.title}</p>
                 <div className="assignment-item__stats">
@@ -72,7 +72,7 @@ export function AgentPlan({ scenario, assignments, insights, selectedIncidentId 
       <section className="panel insights-panel" aria-label="Planner insights">
         <div className="panel__heading">
           <div>
-            <p className="eyebrow">Risk intelligence</p>
+            <p className="eyebrow">Risk readout</p>
             <h2>What changed</h2>
           </div>
           <CheckCircle2 size={19} aria-hidden="true" />

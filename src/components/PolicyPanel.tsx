@@ -9,45 +9,49 @@ interface PolicyPanelProps {
 const sliders = [
   {
     key: 'responseBias',
-    label: 'Response speed',
+    label: 'Move faster',
+    helper: 'Favors nearby teams and shorter ETAs.',
     icon: Gauge,
-    minLabel: 'deliberate',
-    maxLabel: 'immediate',
+    minLabel: 'careful',
+    maxLabel: 'urgent',
   },
   {
     key: 'equityBias',
-    label: 'Population equity',
+    label: 'Protect people',
+    helper: 'Pushes resources toward higher population exposure.',
     icon: Scale,
-    minLabel: 'critical assets',
-    maxLabel: 'people first',
+    minLabel: 'assets',
+    maxLabel: 'residents',
   },
   {
     key: 'budgetGuardrail',
-    label: 'Cost guardrail',
+    label: 'Control cost',
+    helper: 'Penalizes expensive deployments.',
     icon: HandCoins,
-    minLabel: 'spend freely',
+    minLabel: 'flexible',
     maxLabel: 'strict',
   },
   {
     key: 'automationLevel',
-    label: 'Autonomy level',
+    label: 'Let planner act',
+    helper: 'Raises confidence in automatic dispatch.',
     icon: Waypoints,
-    minLabel: 'human-led',
-    maxLabel: 'agent-led',
+    minLabel: 'manual',
+    maxLabel: 'agent',
   },
 ] as const
 
 export function PolicyPanel({ policy, onChange }: PolicyPanelProps) {
   return (
-    <section className="panel policy-panel" aria-label="Planner policy">
+    <section className="panel policy-panel" aria-label="Decision weights">
       <div className="panel__heading">
         <div>
-          <p className="eyebrow">Planner policy</p>
-          <h2>Tradeoff console</h2>
+          <p className="eyebrow">Priorities</p>
+          <h2>Decision weights</h2>
         </div>
       </div>
       <div className="policy-list">
-        {sliders.map(({ key, label, icon: Icon, minLabel, maxLabel }) => (
+        {sliders.map(({ key, label, helper, icon: Icon, minLabel, maxLabel }) => (
           <label className="policy-control" key={key}>
             <span className="policy-control__top">
               <span>
@@ -56,6 +60,7 @@ export function PolicyPanel({ policy, onChange }: PolicyPanelProps) {
               </span>
               <strong>{Math.round(policy[key] * 100)}%</strong>
             </span>
+            <small className="policy-control__helper">{helper}</small>
             <input
               aria-label={label}
               type="range"

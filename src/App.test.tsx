@@ -13,7 +13,7 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: /HELIX Command/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Cyber Blackout/i })).toBeInTheDocument()
     expect(await screen.findByTestId('digital-twin-canvas')).toBeInTheDocument()
-    expect(screen.getByText(/Explainable agent plan/i)).toBeInTheDocument()
+    expect(screen.getByText(/Dispatch plan/i)).toBeInTheDocument()
   })
 
   it('switches scenarios and keeps the interface populated', async () => {

@@ -49,10 +49,10 @@ export function IncidentQueue({
     <section className="panel incidents-panel" aria-label="Incident queue">
       <div className="panel__heading">
         <div>
-          <p className="eyebrow">Live incident queue</p>
-          <h2>Priority stack</h2>
+          <p className="eyebrow">Incident queue</p>
+          <h2>What needs attention</h2>
         </div>
-        <strong>{scenario.incidents.length}</strong>
+        <strong className="panel-count">{scenario.incidents.length} active</strong>
       </div>
       <div className="incident-list">
         {scenario.incidents.map((incident) => {
@@ -65,6 +65,7 @@ export function IncidentQueue({
               type="button"
               key={incident.id}
               onClick={() => onSelectIncident(incident.id)}
+              aria-pressed={selectedIncidentId === incident.id}
             >
               <span className={`incident-item__icon incident-item__icon--${tone}`}>
                 <Icon size={17} aria-hidden="true" />
@@ -72,11 +73,13 @@ export function IncidentQueue({
               <span className="incident-item__body">
                 <span className="incident-item__title">{incident.title}</span>
                 <span className="incident-item__meta">
-                  {sector?.name} · S{incident.severity.toFixed(1)} · risk{' '}
+                  {sector?.name} | Severity {incident.severity.toFixed(1)} | risk{' '}
                   {riskBySector.get(incident.sectorId)?.toFixed(0)}
                 </span>
               </span>
-              <span className="incident-item__badge">{assignmentCount[incident.id] ?? 0}</span>
+              <span className="incident-item__badge" aria-label={`${assignmentCount[incident.id] ?? 0} teams`}>
+                {assignmentCount[incident.id] ?? 0}
+              </span>
             </button>
           )
         })}

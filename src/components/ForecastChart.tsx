@@ -27,7 +27,7 @@ export function ForecastChart({ points }: ForecastChartProps) {
       <div className="panel__heading">
         <div>
           <p className="eyebrow">T+180 forecast</p>
-          <h2>Resilience trajectory</h2>
+          <h2>Recovery path</h2>
         </div>
         <div className="chart-legend">
           <span>
