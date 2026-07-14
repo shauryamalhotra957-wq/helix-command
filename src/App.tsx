@@ -140,6 +140,12 @@ function App() {
 
   return (
     <div className="app-shell">
+      <div className="helix-entry" aria-hidden="true">
+        <div>
+          <span>HELIX Command</span>
+          <strong>Ops console waking</strong>
+        </div>
+      </div>
       <header className="topbar">
         <div className="brand">
           <span className="brand__mark" aria-hidden="true">
@@ -245,6 +251,25 @@ function App() {
               ))}
             </div>
           </div>
+        </section>
+
+        <section className="system-ribbon" aria-label="Mission system status">
+          <article>
+            <span>Autopilot</span>
+            <strong>{autopilot ? 'Running' : 'Paused'}</strong>
+          </article>
+          <article>
+            <span>Incident lock</span>
+            <strong>{selectedIncident.title}</strong>
+          </article>
+          <article>
+            <span>Confidence</span>
+            <strong>{analysis.scorecard.confidence}%</strong>
+          </article>
+          <article>
+            <span>Cost ceiling</span>
+            <strong>{formatCost(analysis.scorecard.operatingCost)}</strong>
+          </article>
         </section>
 
         <div className="command-grid">
@@ -368,9 +393,15 @@ function App() {
       </main>
 
       <footer className="app-footer">
-        <span>Confidence {analysis.scorecard.confidence}%</span>
-        <span>Risk removed {analysis.scorecard.riskReduced}</span>
-        <span>Operating cost {formatCost(analysis.scorecard.operatingCost)}</span>
+        <div>
+          <strong>HELIX Command</strong>
+          <small>Scenario planner, 3D city twin, and policy comparator for crisis teams.</small>
+        </div>
+        <nav aria-label="Footer status">
+          <span>Confidence {analysis.scorecard.confidence}%</span>
+          <span>Risk removed {analysis.scorecard.riskReduced}</span>
+          <span>Operating cost {formatCost(analysis.scorecard.operatingCost)}</span>
+        </nav>
       </footer>
     </div>
   )

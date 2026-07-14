@@ -1081,3 +1081,145 @@
     flex-direction: column;
   }
 }
+
+.system-ribbon {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.system-ribbon article {
+  min-height: 86px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 13px;
+  background:
+    linear-gradient(135deg, rgba(139, 211, 255, 0.11), transparent 36%),
+    rgba(17, 24, 32, 0.9);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
+}
+
+.system-ribbon span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.system-ribbon strong {
+  display: block;
+  margin-top: 8px;
+  overflow: hidden;
+  color: var(--text-strong);
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-footer {
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.app-footer > div {
+  display: grid;
+  gap: 4px;
+  font-family: var(--sans);
+}
+
+.app-footer strong {
+  color: var(--text-strong);
+  font-size: 15px;
+}
+
+.app-footer small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.helix-entry {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(90deg, rgba(139, 211, 255, 0.12) 0 1px, transparent 1px 24px),
+    #060a0e;
+  pointer-events: none;
+  animation: helixEntry 1450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.helix-entry > div {
+  width: min(34rem, calc(100vw - 2rem));
+  border: 1px solid rgba(139, 211, 255, 0.36);
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(10, 16, 22, 0.9);
+  box-shadow: 0 0 48px rgba(139, 211, 255, 0.16);
+  animation: helixEntryCard 980ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.helix-entry span {
+  color: #8bd3ff;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.helix-entry strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-strong);
+  font-size: clamp(1.55rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+
+@keyframes helixEntry {
+  0% { opacity: 1; visibility: visible; }
+  70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes helixEntryCard {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 920px) {
+  .system-ribbon {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-footer,
+  .app-footer nav {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .system-ribbon {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
