@@ -26,6 +26,7 @@ import { analyzeMission, getIncident, getResource, getSector } from './engine/pl
 import { defaultPolicy, scenarios } from './engine/scenarios'
 import type { Incident, Policy, Scenario } from './engine/types'
 import './App.css'
+import './experience.css'
 
 const DigitalTwin = lazy(() =>
   import('./components/DigitalTwin').then((module) => ({ default: module.DigitalTwin })),

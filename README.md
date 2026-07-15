@@ -108,3 +108,7 @@ The default scenario is **Mumbai Monsoon Drill**, a real-place simulated run usi
 ## Important Note
 
 HELIX Command is a simulation and portfolio project. It is not emergency-response software and should not be used for real operational decisions.
+
+## Experience Design
+
+The spatial command surface follows the [HELIX design system](design-system/helix-command/MASTER.md), combining modular bento composition with strong keyboard focus, reliable touch targets, responsive panels, and optional motion.
