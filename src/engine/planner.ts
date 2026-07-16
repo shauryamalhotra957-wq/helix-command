@@ -206,6 +206,13 @@ export function assignResources(scenario: Scenario, policy: Policy): Assignment[
       assignedCapabilityMap.get(pair.incident.id) ?? new Set<Capability>()
     const count = assignedCounts.get(pair.incident.id) ?? 0
     if (incidentSatisfied(pair.incident, assignedCapabilities, count)) continue
+    const hasMissingMandatoryCapabilities = pair.incident.requiredCapabilities.some(
+      (capability) => !assignedCapabilities.has(capability),
+    )
+    const addsMissingCapability = pair.matches.some(
+      (capability) => !assignedCapabilities.has(capability),
+    )
+    if (hasMissingMandatoryCapabilities && !addsMissingCapability) continue
 
     pair.matches.forEach((capability) => assignedCapabilities.add(capability))
     assignedCapabilityMap.set(pair.incident.id, assignedCapabilities)
