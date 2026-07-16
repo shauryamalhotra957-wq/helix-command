@@ -34,6 +34,65 @@ describe('mission planner', () => {
     expect(assignResources(scenario, defaultPolicy)).toEqual(assignResources(scenario, defaultPolicy))
   })
 
+  it('does not dispatch duplicate coverage while mandatory capabilities are missing', () => {
+    const base = scenarioAt(0)
+    const sector = { ...base.sectors[0]!, dependencies: [] }
+    const incident: Scenario['incidents'][number] = {
+      ...base.incidents[0]!,
+      sectorId: sector.id,
+      severity: 7,
+      requiredCapabilities: ['survey', 'evacuate'],
+    }
+    const commonResource = {
+      homeSectorId: sector.id,
+      position: sector.position,
+      capacity: 100,
+      speed: 2,
+      reliability: 0.95,
+      costPerMinute: 20,
+      status: 'ready' as const,
+    }
+    const scenario: Scenario = {
+      ...base,
+      sectors: [sector],
+      incidents: [incident],
+      resources: [
+        {
+          ...commonResource,
+          id: 'survey-primary',
+          name: 'Survey primary',
+          kind: 'drone',
+          capabilities: ['survey'],
+        },
+        {
+          ...commonResource,
+          id: 'survey-backup',
+          name: 'Survey backup',
+          kind: 'drone',
+          capabilities: ['survey'],
+        },
+        {
+          ...commonResource,
+          id: 'evacuation-team',
+          name: 'Evacuation team',
+          kind: 'logistics',
+          capabilities: ['evacuate'],
+          capacity: 30,
+          reliability: 0.75,
+          costPerMinute: 80,
+        },
+      ],
+    }
+
+    const assignments = assignResources(scenario, defaultPolicy)
+    const assignedCapabilities = new Set(
+      assignments.flatMap((assignment) => assignment.matchedCapabilities),
+    )
+
+    expect(assignments).toHaveLength(2)
+    expect(assignedCapabilities).toEqual(new Set(['survey', 'evacuate']))
+  })
+
   it('puts directly stressed sectors at the top of the risk ranking', () => {
     const scenario = scenarioAt(2)
     const risks = computeSectorRisks(scenario)
