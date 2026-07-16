@@ -1,12 +1,27 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
+const digitalTwinState = vi.hoisted(() => ({ failingScenarioId: null as string | null }))
+
 vi.mock('./components/DigitalTwin', () => ({
-  DigitalTwin: () => <div data-testid="digital-twin-canvas" />,
+  DigitalTwin: ({ scenario }: { scenario: { id: string } }) => {
+    if (scenario.id === digitalTwinState.failingScenarioId) {
+      throw new Error('WebGL context lost')
+    }
+    return <div data-testid="digital-twin-canvas" />
+  },
 }))
 
 describe('App', () => {
+  beforeEach(() => {
+    digitalTwinState.failingScenarioId = null
+  })
+
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('renders the command center with mission controls and planner output', async () => {
     render(<App />)
 
@@ -44,5 +59,18 @@ describe('App', () => {
 
     expect(screen.getByLabelText('Move faster')).toHaveValue('0.95')
     expect(screen.getByLabelText('Control cost')).toHaveValue('0.22')
+  })
+
+  it('retries the digital twin after switching away from a failed scenario', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => undefined)
+    digitalTwinState.failingScenarioId = 'mumbai'
+    render(<App />)
+
+    expect(await screen.findByText('3D map unavailable')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: /Heatfire Cascade/i }))
+
+    expect(await screen.findByTestId('digital-twin-canvas')).toBeInTheDocument()
+    expect(screen.queryByText('3D map unavailable')).not.toBeInTheDocument()
   })
 })

@@ -306,6 +306,7 @@ function App() {
             </section>
 
             <ErrorBoundary
+              key={scenario.id}
               fallbackTitle="3D map unavailable"
               fallbackBody="The planner is still active. This fallback appears if WebGL or the browser graphics context fails."
             >
