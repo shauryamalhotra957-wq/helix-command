@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import App from './App'
 
@@ -44,5 +44,16 @@ describe('App', () => {
 
     expect(screen.getByLabelText('Move faster')).toHaveValue('0.95')
     expect(screen.getByLabelText('Control cost')).toHaveValue('0.22')
+  })
+
+  it('filters the incident queue to high-priority work', () => {
+    render(<App />)
+
+    const incidentQueue = within(screen.getByRole('region', { name: 'Incident queue' }))
+    fireEvent.click(incidentQueue.getByRole('button', { name: 'Show priority incidents' }))
+
+    expect(incidentQueue.getByText('3 of 5')).toBeInTheDocument()
+    expect(incidentQueue.getByText(/Mithi River surge near BKC/i)).toBeInTheDocument()
+    expect(incidentQueue.queryByText(/Powai telemetry degradation/i)).not.toBeInTheDocument()
   })
 })
