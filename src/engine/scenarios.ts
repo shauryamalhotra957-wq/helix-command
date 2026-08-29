@@ -737,7 +737,7 @@ function buildScenario(
     dataMode: options.dataMode,
     objectives,
     seed,
-    sectors: cloneSectors(incidents.map((incident) => incident.sectorId), options.sectors),
+    sectors: cloneSectors([...new Set(incidents.map((incident) => incident.sectorId))], options.sectors),
     resources: cloneResources(options.resources),
     incidents,
   }
