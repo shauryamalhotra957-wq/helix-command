@@ -112,3 +112,7 @@ HELIX Command is a simulation and portfolio project. It is not emergency-respons
 ## Experience Design
 
 The spatial command surface follows the [HELIX design system](design-system/helix-command/MASTER.md), combining modular bento composition with strong keyboard focus, reliable touch targets, responsive panels, and optional motion.
+
+## Scenario data integrity
+
+Scenario construction applies telemetry stress by sector ID, so named incidents now affect the intended sector in the Mumbai drill. The planner also returns finite forecast metrics for sparse scenarios. These invariants are covered by `tests/scenario-stress.test.ts` and `tests/planner-sparse-input.test.ts`.
