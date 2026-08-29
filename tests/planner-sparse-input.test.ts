@@ -25,7 +25,7 @@ describe('planner sparse-input safety', () => {
     }
     const result = analyzeMission(scenario, policy)
     expect(result.forecast).toHaveLength(13)
-    expect(result.forecast.every((point) => Object.values(point).every(Number.isFinite))).toBe(true)
+    expect(result.forecast.every((point) => Object.values(point).every((value) => typeof value === 'number' && Number.isFinite(value)))).toBe(true)
     expect(result.scorecard.medianEta).toBe(0)
   })
 })
