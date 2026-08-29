@@ -244,11 +244,13 @@ export function forecastMission(
   policy: Policy,
 ): ForecastPoint[] {
   const initialRisks = computeSectorRisks(scenario)
-  const initialRisk = initialRisks.reduce((total, risk) => total + risk.score, 0) / initialRisks.length
+  const initialRisk = initialRisks.length > 0
+    ? initialRisks.reduce((total, risk) => total + risk.score, 0) / initialRisks.length
+    : 0
   const initialDemand = scenario.incidents.reduce((total, incident) => total + incident.demand, 0)
   const initialTrust =
     scenario.sectors.reduce((total, sector) => total + sector.telemetry.trust, 0) /
-    scenario.sectors.length
+    Math.max(1, scenario.sectors.length)
 
   return Array.from({ length: 13 }, (_, index) => {
     const minute = index * 15
@@ -276,7 +278,7 @@ export function forecastMission(
           return total + resource.capacity * sigmoid((minute - assignment.etaMinutes) / 18)
         }, 0),
     )
-    const riskNow = clamp(initialRisk + spread - mitigation / scenario.sectors.length)
+    const riskNow = clamp(initialRisk + spread - mitigation / Math.max(1, scenario.sectors.length))
     const resilience = clamp(100 - riskNow + policy.automationLevel * 4)
     const publicTrust = clamp(
       initialTrust - spread * 0.15 + mitigation * 0.09 - operatingCost / 50000,
