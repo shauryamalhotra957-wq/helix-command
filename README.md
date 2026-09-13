@@ -1,5 +1,8 @@
 # HELIX Command
 
+[![CI](https://github.com/shauryamalhotra957-wq/helix-command/actions/workflows/ci.yml/badge.svg)](https://github.com/shauryamalhotra957-wq/helix-command/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 HELIX Command is a browser-based crisis response simulator for city-scale operations. It simulates a living city, ranks sector risk, assigns response resources, forecasts resilience, and explains every dispatch decision without needing external APIs or keys.
 
 The project is designed as a final-year showcase piece: it has a serious technical thesis, a polished real-time interface, deterministic simulation logic, tests, and presentation-ready documentation.
